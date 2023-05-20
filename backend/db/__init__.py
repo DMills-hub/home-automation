@@ -27,8 +27,22 @@ class Collection:
 
     def find_one(self, filter):
         document = self.collection.find_one(filter=filter)
-        return document
+        serialisedDoc = self.serialise_document(document=document)
+        return serialisedDoc
 
     def delete(self, id: str) -> int:
         delete = self.collection.delete_one({"_id": ObjectId(id)})
         return delete.deleted_count
+    
+    def find_by_id(self,id: str):
+        foundDoc = self.collection.find_one(filter={"_id":ObjectId(id)})
+        serialiseDoc = self.serialise_document(document=foundDoc)
+        return serialiseDoc
+    
+    def serialise_document(self,document):
+        document["_id"] = document["_id"].__str__()
+        return document
+
+
+
+    

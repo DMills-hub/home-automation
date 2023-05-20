@@ -25,3 +25,9 @@ def delete():
         return {"success": True}
 
     return {"success": False}
+
+@app.route('/api/device/<id>', methods=['POST'])
+def find(id):
+    device = Device(id=id, hardware=None, name=None, address=None)
+    find = device.find_device()
+    return find
