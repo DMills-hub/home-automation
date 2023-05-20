@@ -2,11 +2,11 @@ from db import Collection
 
 
 class Device:
-    def __init__(self, hardware, address, name):
+    def __init__(self, hardware: str | None, address: str | None, name: str | None, id: str | None):
         self.hardware = hardware
         self.address = address
         self.name = name
-        self.id = None
+        self.id = id
         self.collection = Collection('device')
 
     def add_device(self) -> dict[bool, str | None, str | None]:
@@ -20,3 +20,7 @@ class Device:
 
         self.id = documentId
         return {"success": True, "id": self.id}
+
+    def delete_device(self):
+        count = self.collection.delete(self.id)
+        return count == 1
