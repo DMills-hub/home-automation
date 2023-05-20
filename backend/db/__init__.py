@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 import os
 from dotenv import load_dotenv
+from bson import ObjectId
 
 load_dotenv()
 
@@ -27,3 +28,7 @@ class Collection:
     def find_one(self, filter):
         document = self.collection.find_one(filter=filter)
         return document
+
+    def delete(self, id: str) -> int:
+        delete = self.collection.delete_one({"_id": ObjectId(id)})
+        return delete.deleted_count

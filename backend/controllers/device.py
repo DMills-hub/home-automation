@@ -12,3 +12,16 @@ def add():
     device = Device(hardware=hardware, address=address, name=name)
     device = device.add_device()
     return device
+
+
+@app.route('/api/device/delete', methods=['POST'])
+def delete():
+    json = request.get_json()
+    id = json['id']
+    device = Device(id=id, hardware=None, name=None, address=None)
+    deleted = device.delete_device()
+
+    if deleted:
+        return {"success": True}
+
+    return {"success": False}
