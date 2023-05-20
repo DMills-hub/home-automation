@@ -9,7 +9,7 @@ def add():
     hardware = json['hardware']
     address = json['address']
     name = json['name']
-    device = Device(hardware=hardware, address=address, name=name)
+    device = Device(hardware=hardware, address=address, name=name,id=None)
     device = device.add_device()
     return device
 
