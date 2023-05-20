@@ -1,4 +1,5 @@
 from model.device import Device
+from db import Collection
 from api import app
 from flask import request
 
@@ -31,3 +32,9 @@ def find(id):
     device = Device(id=id, hardware=None, name=None, address=None)
     find = device.find_device()
     return find
+
+@app.route('/api/device/all', methods=['POSt'])
+def findall():
+
+    AllDevices = Collection("device").find_all()
+    return AllDevices

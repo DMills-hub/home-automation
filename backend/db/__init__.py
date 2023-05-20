@@ -39,9 +39,21 @@ class Collection:
         serialiseDoc = self.serialise_document(document=foundDoc)
         return serialiseDoc
     
+    def find_all(self):
+        foundDocs = self.collection.find({})
+        serialisedDocs = []
+        for doc in foundDocs:
+            serialisedDocs.append(self.serialise_document(doc)) 
+        
+        return serialisedDocs
+            
     def serialise_document(self,document):
-        document["_id"] = document["_id"].__str__()
+        if document:
+            document["_id"] = document["_id"].__str__() 
         return document
+    
+
+
 
 
 
