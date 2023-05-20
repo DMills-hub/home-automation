@@ -1,5 +1,5 @@
 from db import Collection
-
+from bson import ObjectId
 
 class Device:
     def __init__(self, hardware: str | None, address: str | None, name: str | None, id: str | None):
@@ -24,3 +24,6 @@ class Device:
     def delete_device(self):
         count = self.collection.delete(self.id)
         return count == 1
+    def find_device(self):
+        foundDevice = self.collection.find_by_id(self.id)
+        return foundDevice
