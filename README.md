@@ -9,14 +9,10 @@
 
 #### Backend
 
-- Make sure you are in the backend directory `cd backend`
-- Create a [python venv](https://docs.python.org/3/tutorial/venv.html)
-- Run docker containers in detached mode `docker-compose up -d`
-- Run `pip install`
-- Run `flask run`
+- Make sure you are in your python venv
+- Run `make run-backend`
 
 #### App
 
-- Make sure you are in the app directory `cd app`
-- Run 'npm start'
+- Run `make run-app`
 
