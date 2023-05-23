@@ -10,7 +10,7 @@ def add():
     hardware = json['hardware']
     address = json['address']
     name = json['name']
-    device = Device(hardware=hardware, address=address, name=name,id=None)
+    device = Device(hardware=hardware, address=address, name=name, id=None)
     device = device.add_device()
     return device
 
@@ -27,11 +27,13 @@ def delete():
 
     return {"success": False}
 
+
 @app.route('/api/device/<id>', methods=['POST'])
 def find(id):
     device = Device(id=id, hardware=None, name=None, address=None)
     find = device.find_device()
     return find
+
 
 @app.route('/api/device/all', methods=['POSt'])
 def findall():
