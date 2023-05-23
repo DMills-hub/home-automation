@@ -34,7 +34,12 @@ def find(id):
     find = device.find_device()
     return find
 
+
 @app.route('/api/device/all', methods=['POST'])
-def findall():
-    AllDevices = Collection("device").find_all()
-    return AllDevices
+def find_all():
+    json = request.get_json()
+    page_size = json['page_size']
+    page_num = json['page_num']
+    all_devices = Collection("device").find_all(
+        page_size=page_size, page_num=page_num)
+    return all_devices

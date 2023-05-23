@@ -33,28 +33,24 @@ class Collection:
     def delete(self, id: str) -> int:
         delete = self.collection.delete_one({"_id": ObjectId(id)})
         return delete.deleted_count
-    
-    def find_by_id(self,id: str):
-        foundDoc = self.collection.find_one(filter={"_id":ObjectId(id)})
+
+    def find_by_id(self, id: str):
+        foundDoc = self.collection.find_one(filter={"_id": ObjectId(id)})
         serialiseDoc = self.serialise_document(document=foundDoc)
         return serialiseDoc
-    
-    def find_all(self):
-        foundDocs = self.collection.find({})
-        serialisedDocs = []
-        for doc in foundDocs:
-            serialisedDocs.append(self.serialise_document(doc)) 
-        
-        return serialisedDocs
-            
-    def serialise_document(self,document):
-        if document:
-            document["_id"] = document["_id"].__str__() 
+
+    def find_all(self, page_size: int, page_num: int):
+        skip = (page_num - 1) * page_size
+        found_docs = self.collection.find(limit=page_size, skip=skip)
+        max_results = self.collection.count_documents(filter={})
+        max_pages = round(max_results / page_size)
+        serialised_docs = []
+        for doc in found_docs:
+            serialised_docs.append(self.serialise_document(doc))
+
+        return {"page_num": page_num, "max_results": max_results, "results": serialised_docs, "max_pages": max_pages}
+
+    def serialise_document(self, document):
+        if document and document['_id']:
+            document["_id"] = str(document['_id'])
         return document
-    
-
-
-
-
-
-    
