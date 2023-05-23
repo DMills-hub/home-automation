@@ -33,7 +33,7 @@ def find(id):
     find = device.find_device()
     return find
 
-@app.route('/api/device/all', methods=['POSt'])
+@app.route('/api/device/all', methods=['POST'])
 def findall():
 
     AllDevices = Collection("device").find_all()
