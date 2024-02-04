@@ -16,3 +16,12 @@
 
 - Run `make run-app`
 
+#### CDK
+
+- AWS CDK Infrastructure is located in cdk folder
+- To deploy you will need a bootstrapped version of cdk deployed to the relevant AWS account -> [docs](https://docs.aws.amazon.com/cdk/v2/guide/bootstrapping.html)
+- To Deploy:
+    - `npm run cdk -- synth --profile AWS_PROFILE_NAME STACK_NAME`
+    - `npm run cdk -- diff --profile AWS_PROFILE_NAME STACK_NAME`
+    - Before running the deploy command make sure these two previous commands give the expected output
+    - `npm run cdk -- deploy --profile AWS_PROFILE_NAME STACK_NAME`
