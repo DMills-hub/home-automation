@@ -1,16 +1,1 @@
 .env
-
-# Python ignore
-.installed.cfg
-bin
-develop-eggs
-dist
-downloads
-eggs
-parts
-*.egg-info
-lib
-lib64
-__pycache__
-*.py[cod]
-pyvenv.cfg
