@@ -13,6 +13,7 @@ export class HomeAutomationFargate extends Construct {
   public readonly fargateService: ecs.FargateService
   public readonly taskDefinition: ecs.TaskDefinition
   public readonly appEcsDockerImage: HomeAutomationEcsDockerImage
+  public readonly backendEcsDockerImage: HomeAutomationEcsDockerImage
 
   constructor(scope: Construct, id: string, props: Props) {
     super(scope, id)
@@ -42,6 +43,15 @@ export class HomeAutomationFargate extends Construct {
       {
         directory: path.join(__dirname, '../../app'),
         tag: 'home-automation-app'
+      }
+    )
+
+    this.backendEcsDockerImage = new HomeAutomationEcsDockerImage(
+      this,
+      'HomeAutomationEcsBackendDockerImage',
+      {
+        directory: path.join(__dirname, '../../backend'),
+        tag: 'home-automation-backend'
       }
     )
 
@@ -81,6 +91,19 @@ export class HomeAutomationFargate extends Construct {
           containerPort: 80,
           hostPort: 80,
           name: 'app-port'
+        }
+      ]
+    })
+
+    this.taskDefinition.addContainer('HomeAutomationBackend', {
+      image: ecs.ContainerImage.fromDockerImageAsset(
+        this.backendEcsDockerImage.dockerImageAsset
+      ),
+      containerName: 'home-automation-backend',
+      portMappings: [
+        {
+          containerPort: 5000,
+          hostPort: 5000
         }
       ]
     })
