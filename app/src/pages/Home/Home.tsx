@@ -1,5 +1,5 @@
-import useApi from '../../hooks/useApi'
-import Button from '../../components/Button'
+import useApi from '@hooks/useApi'
+import Button from '@components/Button'
 
 function Home() {
   const query = useApi('devices', 'device/all', { page_size: 5, page_num: 1 })

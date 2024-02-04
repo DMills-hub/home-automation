@@ -5,14 +5,14 @@ const StyledNavigation = styled.nav`
   display: flex;
   align-items: center;
   min-height: 80px;
-  background-color: ${(props) => props.theme.palette.zomp};
+  background-color: ${(props: any) => props.theme.palette.zomp};
   margin-bottom: 10px;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
 `
 
 const StyledHeader = styled.header`
   margin-left: 10px;
-  color: ${(props) => props.theme.palette.white};
+  color: ${(props: any) => props.theme.palette.white};
   font-weight: bold;
   font-size: 1.5em;
 `
