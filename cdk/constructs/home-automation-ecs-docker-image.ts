@@ -11,6 +11,11 @@ interface Props {
    * Docker build tag
    */
   tag: string
+
+  /**
+   * Asset name
+   */
+  assetName: string
 }
 
 export class HomeAutomationEcsDockerImage extends Construct {
@@ -23,7 +28,8 @@ export class HomeAutomationEcsDockerImage extends Construct {
       directory: props.directory,
       buildArgs: {
         tag: props.tag
-      }
+      },
+      assetName: props.assetName
     })
   }
 }

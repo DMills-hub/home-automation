@@ -42,7 +42,8 @@ export class HomeAutomationFargate extends Construct {
       'HomeAutomationEcsAppDockerImage',
       {
         directory: path.join(__dirname, '../../app'),
-        tag: 'home-automation-app'
+        tag: 'home-automation-app',
+        assetName: 'home-automation-backend'
       }
     )
 
@@ -51,7 +52,8 @@ export class HomeAutomationFargate extends Construct {
       'HomeAutomationEcsBackendDockerImage',
       {
         directory: path.join(__dirname, '../../backend'),
-        tag: 'home-automation-backend'
+        tag: 'home-automation-backend',
+        assetName: 'home-automation-backend'
       }
     )
 
@@ -86,6 +88,12 @@ export class HomeAutomationFargate extends Construct {
         this.appEcsDockerImage.dockerImageAsset
       ),
       containerName: 'home-automation-app',
+      logging: ecs.LogDriver.awsLogs({
+        streamPrefix: 'home-automation-app'
+      }),
+      environment: {
+        REACT_APP_API_HOST: ''
+      },
       portMappings: [
         {
           containerPort: 80,
@@ -99,6 +107,9 @@ export class HomeAutomationFargate extends Construct {
       image: ecs.ContainerImage.fromDockerImageAsset(
         this.backendEcsDockerImage.dockerImageAsset
       ),
+      logging: ecs.LogDriver.awsLogs({
+        streamPrefix: 'home-automation-backend'
+      }),
       containerName: 'home-automation-backend',
       portMappings: [
         {
