@@ -73,7 +73,7 @@ export class HomeAutomationFargate extends Construct {
     securityGroup.addIngressRule(ec2.Peer.anyIpv6(), ec2.Port.tcp(80))
     // Only security group can get routed to port 5000, which should be backend container
     securityGroup.addIngressRule(
-      ec2.Peer.securityGroupId(securityGroup.uniqueId),
+      ec2.Peer.securityGroupId(securityGroup.securityGroupId),
       ec2.Port.tcp(5000)
     )
 
