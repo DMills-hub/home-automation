@@ -71,9 +71,11 @@ export class HomeAutomationFargate extends Construct {
     securityGroup.addIngressRule(ec2.Peer.anyIpv4(), ec2.Port.tcp(80))
     // Any IPV6 address gets routed to port 80, which should be app container
     securityGroup.addIngressRule(ec2.Peer.anyIpv6(), ec2.Port.tcp(80))
-    // Any IPV4 address can get routed to port 5000, which should be backend container
-    securityGroup.addIngressRule(ec2.Peer.anyIpv4(), ec2.Port.tcp(5000))
-    // Any IPV6 address can get routed to port 5000, which should be backend container
+    // Only security group can get routed to port 5000, which should be backend container
+    securityGroup.addIngressRule(
+      ec2.Peer.securityGroupId(securityGroup.uniqueId),
+      ec2.Port.tcp(5000)
+    )
 
     this.fargateService = new ecs.FargateService(
       this,
