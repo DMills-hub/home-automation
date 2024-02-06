@@ -6,14 +6,12 @@ const useApi = (
   json?: { [key: string]: any }
 ) => {
   async function getApiData() {
-    const prodHref = window.location.href
-
-    const baseUrl =
+    const apiUrl =
       process.env.NODE_ENV === 'production'
-        ? prodHref.substring(0, prodHref.length - 1)
+        ? '/api'
         : process.env.REACT_APP_API_HOST
 
-    const res = await fetch(`${baseUrl}/api/${apiRoute}`, {
+    const res = await fetch(`${apiUrl}/${apiRoute}`, {
       method: 'POST',
       body: json ? JSON.stringify(json) : undefined,
       headers: {

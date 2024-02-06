@@ -14,6 +14,7 @@ export class HomeAutomationFargate extends Construct {
   public readonly taskDefinition: ecs.TaskDefinition
   public readonly appEcsDockerImage: HomeAutomationEcsDockerImage
   public readonly backendEcsDockerImage: HomeAutomationEcsDockerImage
+  public readonly nginxEcsDockerImage: HomeAutomationEcsDockerImage
 
   constructor(scope: Construct, id: string, props: Props) {
     super(scope, id)
@@ -57,6 +58,16 @@ export class HomeAutomationFargate extends Construct {
       }
     )
 
+    this.nginxEcsDockerImage = new HomeAutomationEcsDockerImage(
+      this,
+      'HomeAutomationEcsNginxDockerImage',
+      {
+        directory: path.join(__dirname, '../../nginx'),
+        tag: 'home-automation-nginx',
+        assetName: 'home-automation-nginx'
+      }
+    )
+
     const securityGroup = new ec2.SecurityGroup(
       this,
       'HomeAutomationFargateSecurityGroupd',
@@ -71,11 +82,6 @@ export class HomeAutomationFargate extends Construct {
     securityGroup.addIngressRule(ec2.Peer.anyIpv4(), ec2.Port.tcp(80))
     // Any IPV6 address gets routed to port 80, which should be app container
     securityGroup.addIngressRule(ec2.Peer.anyIpv6(), ec2.Port.tcp(80))
-    // Only security group can get routed to port 5000, which should be backend container
-    securityGroup.addIngressRule(
-      ec2.Peer.securityGroupId(securityGroup.securityGroupId),
-      ec2.Port.tcp(5000)
-    )
 
     this.fargateService = new ecs.FargateService(
       this,
@@ -88,6 +94,23 @@ export class HomeAutomationFargate extends Construct {
       }
     )
 
+    this.taskDefinition.addContainer('HomeAutomationNginx', {
+      image: ecs.ContainerImage.fromDockerImageAsset(
+        this.nginxEcsDockerImage.dockerImageAsset
+      ),
+      containerName: 'home-automation-nginx',
+      logging: ecs.LogDriver.awsLogs({
+        streamPrefix: 'home=automation-nginx'
+      }),
+      portMappings: [
+        {
+          containerPort: 80,
+          hostPort: 80,
+          name: 'nginx-port'
+        }
+      ]
+    })
+
     this.taskDefinition.addContainer('HomeAutomationApp', {
       image: ecs.ContainerImage.fromDockerImageAsset(
         this.appEcsDockerImage.dockerImageAsset
@@ -98,8 +121,8 @@ export class HomeAutomationFargate extends Construct {
       }),
       portMappings: [
         {
-          containerPort: 80,
-          hostPort: 80,
+          containerPort: 3000,
+          hostPort: 3000,
           name: 'app-port'
         }
       ]
