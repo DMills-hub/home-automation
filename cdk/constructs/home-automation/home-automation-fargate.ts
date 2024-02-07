@@ -1,9 +1,11 @@
 import { Construct } from 'constructs'
 import * as ec2 from 'aws-cdk-lib/aws-ec2'
 import * as ecs from 'aws-cdk-lib/aws-ecs'
+import * as route53 from 'aws-cdk-lib/aws-route53'
 import { HomeAutomationEcsDockerImage } from './home-automation-ecs-docker-image'
 import path = require('path')
 import { Config } from '../../definitions'
+import { Tags } from 'aws-cdk-lib'
 
 interface Props extends Pick<Config, 'vpc'> {}
 
@@ -15,6 +17,8 @@ export class HomeAutomationFargate extends Construct {
   public readonly appEcsDockerImage: HomeAutomationEcsDockerImage
   public readonly backendEcsDockerImage: HomeAutomationEcsDockerImage
   public readonly nginxEcsDockerImage: HomeAutomationEcsDockerImage
+  private readonly HOSTED_ZONE_ID = 'Z0997108SZN2DJJ6WTLQ'
+  private readonly DOMAIN_NAME = 'home-automation-app.dmills-hub.com'
 
   constructor(scope: Construct, id: string, props: Props) {
     super(scope, id)
@@ -39,6 +43,9 @@ export class HomeAutomationFargate extends Construct {
     this.cluster = new ecs.Cluster(this, 'HomeAutomationEcsCluster', {
       vpc: this.vpc
     })
+
+    Tags.of(this.cluster).add('HostedZoneId', this.HOSTED_ZONE_ID)
+    Tags.of(this.cluster).add('DomainName', this.DOMAIN_NAME)
 
     this.appEcsDockerImage = new HomeAutomationEcsDockerImage(
       this,
