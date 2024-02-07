@@ -3,6 +3,9 @@ from db import Collection
 from api import app
 from flask import request
 
+@app.route('/api/device/health', methods=['POST'])
+def health():
+    return { "healthy": True, "message": "Device api is up." }
 
 @app.route('/api/device/add', methods=['POST'])
 def add():
