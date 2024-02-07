@@ -3,7 +3,7 @@ import * as ec2 from 'aws-cdk-lib/aws-ec2'
 import * as ecs from 'aws-cdk-lib/aws-ecs'
 import { HomeAutomationEcsDockerImage } from './home-automation-ecs-docker-image'
 import path = require('path')
-import { Config } from '../definitions'
+import { Config } from '../../definitions'
 
 interface Props extends Pick<Config, 'vpc'> {}
 
@@ -21,7 +21,9 @@ export class HomeAutomationFargate extends Construct {
 
     this.vpc = new ec2.Vpc(this, 'HomeAutomationVpc', {
       vpcName: props.vpc.vpcName,
-      ipAddresses: ec2.IpAddresses.cidr(props.vpc.vpcCidr)
+      ipAddresses: ec2.IpAddresses.cidr(props.vpc.vpcCidr),
+      // nat gateways are expensive and unneeded
+      natGateways: 0
     })
 
     this.taskDefinition = new ecs.TaskDefinition(
