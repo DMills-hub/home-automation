@@ -51,7 +51,7 @@ export class HomeAutomationFargate extends Construct {
       this,
       'HomeAutomationEcsAppDockerImage',
       {
-        directory: path.join(__dirname, '../../app'),
+        directory: path.join(__dirname, '../../../app'),
         tag: 'home-automation-app',
         assetName: 'home-automation-backend'
       }
@@ -61,7 +61,7 @@ export class HomeAutomationFargate extends Construct {
       this,
       'HomeAutomationEcsBackendDockerImage',
       {
-        directory: path.join(__dirname, '../../backend'),
+        directory: path.join(__dirname, '../../../backend'),
         tag: 'home-automation-backend',
         assetName: 'home-automation-backend'
       }
@@ -71,7 +71,7 @@ export class HomeAutomationFargate extends Construct {
       this,
       'HomeAutomationEcsNginxDockerImage',
       {
-        directory: path.join(__dirname, '../../nginx'),
+        directory: path.join(__dirname, '../../../nginx'),
         tag: 'home-automation-nginx',
         assetName: 'home-automation-nginx'
       }
