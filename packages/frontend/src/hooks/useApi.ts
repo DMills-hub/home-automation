@@ -6,10 +6,7 @@ const useApi = (
   json?: { [key: string]: any }
 ) => {
   async function getApiData() {
-    const apiUrl =
-      process.env.NODE_ENV === 'production'
-        ? '/api'
-        : process.env.REACT_APP_API_HOST
+    const apiUrl = `${process.env.REACT_APP_API_URL}/api`
 
     const res = await fetch(`${apiUrl}/${apiRoute}`, {
       method: 'POST',
@@ -18,6 +15,9 @@ const useApi = (
         'Content-Type': 'application/json'
       }
     })
+
+    console.log(res)
+
     return res.json()
   }
 

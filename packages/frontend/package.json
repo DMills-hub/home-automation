@@ -21,10 +21,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "craco eject"
+    "start": "sst bind craco start",
+    "build": "sst bind craco build",
+    "test": "sst bind craco test",
+    "eject": "sst bind craco eject"
   },
   "eslintConfig": {
     "extends": [

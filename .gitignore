@@ -1,1 +1,18 @@
-.env
+# dependencies
+node_modules
+
+# sst
+.sst
+.build
+
+# opennext
+.open-next
+
+# misc
+.DS_Store
+
+# local env files
+.env*.local
+
+# TO-DO Write Up
+TO-DO

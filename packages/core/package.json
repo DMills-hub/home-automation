@@ -1,0 +1,14 @@
+{
+  "name": "@home-automation/core",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "sst bind vitest",
+    "typecheck": "tsc -noEmit"
+  },
+  "devDependencies": {
+    "vitest": "^1.2.2",
+    "@types/node": "^20.11.17",
+    "sst": "^2.40.1"
+  }
+}
