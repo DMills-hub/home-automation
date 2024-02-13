@@ -6,7 +6,7 @@ declare module 'styled-components' {
       height: number
     }
     palette: {
-      blue: '#0A2342'
+      blue: '#79ADDC'
       zomp: '#2CA58D'
       cBlue: '#84BC9C'
       white: '#FFFDF7'

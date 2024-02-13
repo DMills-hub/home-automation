@@ -1,4 +1,5 @@
 import { useQuery } from 'react-query'
+import { API_URL } from '@util/api'
 
 const useApi = (
   key: string,
@@ -6,17 +7,13 @@ const useApi = (
   json?: { [key: string]: any }
 ) => {
   async function getApiData() {
-    const apiUrl = `${process.env.REACT_APP_API_URL}/api`
-
-    const res = await fetch(`${apiUrl}/${apiRoute}`, {
+    const res = await fetch(`${API_URL}/${apiRoute}`, {
       method: 'POST',
       body: json ? JSON.stringify(json) : undefined,
       headers: {
         'Content-Type': 'application/json'
       }
     })
-
-    console.log(res)
 
     return res.json()
   }

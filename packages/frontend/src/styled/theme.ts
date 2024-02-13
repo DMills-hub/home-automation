@@ -4,7 +4,7 @@ export const defaultTheme: DefaultTheme = {
     height: 80
   },
   palette: {
-    blue: '#0A2342',
+    blue: '#79ADDC',
     cBlue: '#84BC9C',
     pink: '#F46197',
     white: '#FFFDF7',

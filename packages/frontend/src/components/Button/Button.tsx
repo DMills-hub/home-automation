@@ -1,11 +1,24 @@
+import styled from '@styled/index'
+
 interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
-  text?: string;
-  colour?: string;
+  colour?: string
 }
 
-const Button = (props: ButtonProps) => {
-  // @ts-ignore
-  return <button {...props}>{props.text}</button>;
-};
+interface Props extends React.PropsWithChildren<ButtonProps> {}
 
-export default Button;
+const StyledButton = styled.button`
+  padding: 10px;
+  background-color: ${(props) => props.theme.palette.blue};
+  color: ${(props) => props.theme.palette.white};
+  font-weight: bold;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+`
+
+const Button = (props: Props) => {
+  // @ts-ignore
+  return <StyledButton {...props}>{props.children}</StyledButton>
+}
+
+export default Button
