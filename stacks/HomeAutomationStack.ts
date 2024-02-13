@@ -1,6 +1,6 @@
 import { Api, StackContext, StaticSite, Table } from 'sst/constructs'
 
-export function ExampleStack({ stack }: StackContext) {
+export function HomeAutomationStack({ stack }: StackContext) {
   const table = new Table(stack, 'Device', {
     fields: {
       id: 'string',
@@ -34,7 +34,10 @@ export function ExampleStack({ stack }: StackContext) {
     path: 'packages/frontend',
     buildCommand: 'npm run build',
     buildOutput: 'build',
-    customDomain: 'home-automation-app.dmills-hub.com',
+    customDomain: {
+      domainName: 'home-automation-app.dmills-hub.com',
+      hostedZone: 'dmills-hub.com'
+    },
     environment: {
       REACT_APP_API_URL: api.url
     }
