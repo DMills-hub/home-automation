@@ -34,6 +34,7 @@ export function ExampleStack({ stack }: StackContext) {
     path: 'packages/frontend',
     buildCommand: 'npm run build',
     buildOutput: 'build',
+    customDomain: 'home-automation-app.dmills-hub.com',
     environment: {
       REACT_APP_API_URL: api.url
     }
