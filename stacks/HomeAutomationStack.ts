@@ -16,7 +16,6 @@ export function HomeAutomationStack({ stack }: StackContext) {
 
   const api = new Api(stack, 'Api', {
     routes: {
-      'POST /api/device/health': 'packages/functions/src/device/health.handler',
       'POST /api/device/add': 'packages/functions/src/device/add.handler',
       'POST /api/device/{id}': 'packages/functions/src/device/id.handler',
       'POST /api/device/all': 'packages/functions/src/device/all.handler'

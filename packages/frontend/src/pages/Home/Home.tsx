@@ -3,6 +3,7 @@ import Button from '@components/Button'
 import styled from '@styled/index'
 import { API_URL } from '@util/api'
 import { useMutation } from 'react-query'
+import PageContainer from '@components/styled/PageContainer'
 
 const Form = styled.form`
   display: flex;
@@ -30,8 +31,6 @@ const keys: ElementKey[] = ['address', 'hardware', 'name', 'type']
 function Home() {
   const { mutate } = useMutation({
     mutationFn: async (variables: Elements) => {
-      console.log('hre')
-
       await fetch(`${API_URL}/device/add`, {
         method: 'POST',
         body: JSON.stringify(variables)
@@ -43,8 +42,6 @@ function Home() {
 
   const onSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
-    // @ts-ignore
-    console.log(e.target.elements)
     // @ts-ignore
     const elements = Object.keys(e.target.elements).reduce(
       (accumalator, curValue) => {
@@ -59,13 +56,11 @@ function Home() {
       {}
     ) as Elements
 
-    console.log(elements)
-
     await mutate(elements)
   }
 
   return (
-    <div>
+    <PageContainer>
       Home
       <Button onClick={() => query.refetch()}>Refetch</Button>
       <p>Is healthy: {query.data?.healthy}</p>
@@ -77,7 +72,7 @@ function Home() {
         <input name="type" placeholder="Type..." />
         <Button type="submit">Submit</Button>
       </Form>
-    </div>
+    </PageContainer>
   )
 }
 

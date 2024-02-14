@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from '@styled/index'
 
 const StyledNavigation = styled.nav`
@@ -6,8 +5,8 @@ const StyledNavigation = styled.nav`
   align-items: center;
   min-height: 80px;
   background-color: ${(props: any) => props.theme.palette.zomp};
-  margin-bottom: 10px;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+  margin-right: 20px;
 `
 
 const StyledHeader = styled.header`
