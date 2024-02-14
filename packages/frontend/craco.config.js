@@ -6,7 +6,8 @@ module.exports = {
       '@components': path.resolve(__dirname, 'src/components'),
       '@pages': path.resolve(__dirname, 'src/pages'),
       '@hooks': path.resolve(__dirname, 'src/hooks'),
-      '@util': path.resolve(__dirname, 'src/util')
+      '@util': path.resolve(__dirname, 'src/util'),
+      '@definitions': path.resolve(__dirname, 'src/definitions.ts')
     }
   }
 }

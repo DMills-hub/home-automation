@@ -17,8 +17,8 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <Global />
         <PageWrapper>
-          <Navigation />
           <BrowserRouter>
+            <Navigation />
             <Routes>
               <Route path="/" Component={Home} />
               <Route path="/device/add" Component={AddDevice} />

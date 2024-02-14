@@ -1,5 +1,10 @@
-import styled, { ThemeProvider as TProvider } from 'styled-components'
+import styled, {
+  ThemeProvider as TProvider,
+  css as styledCss
+} from 'styled-components'
 
 export const ThemeProvider = TProvider
 
 export default styled
+
+export const css = styledCss
